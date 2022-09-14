@@ -21,6 +21,6 @@
   },
   "homepage": "https://github.com/bburton5/team-profile-generator#readme",
   "dependencies": {
-    "inquirer": "^9.1.1"
+    "inquirer": "^8.2.4"
   }
 }
