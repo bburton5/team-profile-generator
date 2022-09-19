@@ -1,5 +1,6 @@
 // Includes packages needed for this application
 const inquirer = require("inquirer");
+const fs = require("fs");
 const Manager = require("./lib/manager");
 const Engineer = require("./lib/engineer");
 const Intern = require("./lib/intern");
@@ -166,6 +167,7 @@ const internPrompt = () => {
 const generateTeam = () => {
   console.log("generating team...");
   console.log(team);
+  generateWebsite("index.html", team);
 };
 
 const instructions = () => {
@@ -173,6 +175,59 @@ const instructions = () => {
   console.log(
     "The first four questions are in regards to your team manager. All questions afterwards are in regards to all employee types other than manager."
   );
+};
+
+const generateWebsite = (fileName, team) => {
+  fs.writeFile(fileName, generateData(team), function (err, data) {
+    console.log(Error);
+  });
+};
+
+const generateCards = () => {
+  const result = "";
+  for (let i = 0; i < team.length; i++) {
+    result =
+      result +
+      `<div class="card" style="width: 18rem;">
+    <div class="card-body">
+      <p class="card-text">
+      Name: ${team[i].name} <br>
+      Employee ID Number: ${team[i].id} <br>
+      Email: ${team[i].email} <br>
+      Office Number: ${team[i].office}</p>
+    </div>
+  </div>`;
+  }
+  return result;
+};
+
+const generateData = (data) => {
+  return `<!DOCTYPE html>
+  <html lang="en">
+    <head>
+      <meta charset="UTF-8" />
+      <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <title>Document</title>
+      <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+        crossorigin="anonymous"
+      />
+      <link rel="stylesheet" href="./src/style.css" />
+    </head>
+    <body>
+    <nav class="navbar navbar-light bg-light">
+  <a class="navbar-brand" href="#">
+    Your Generated Team:
+  </a>
+</nav>
+      <p>
+      ${generateCards()}
+      </p>
+    </body>
+  </html>`;
 };
 
 instructions();
