@@ -31,7 +31,6 @@ const managerPrompts = () => {
       },
     ])
     .then((answers) => {
-      console.log(answers);
       const manager = new Manager(
         answers.name,
         answers.id,
@@ -54,20 +53,15 @@ const next = () => {
       },
     ])
     .then((confirmation) => {
-      console.log(confirmation);
-      console.log(confirmation.add);
       if (confirmation.add === "Yes") {
-        console.log("running Yes case");
         typePrompt();
       } else if (confirmation.add === "No") {
-        console.log("running No case");
         generateTeam();
       }
     });
 };
 
 const typePrompt = () => {
-  console.log("typePrompt functioning");
   return inquirer
     .prompt([
       {
@@ -78,8 +72,6 @@ const typePrompt = () => {
       },
     ])
     .then((type) => {
-      console.log(type);
-      console.log(type.title);
       if (type.title === "Engineer") {
         engineerPrompt();
       } else if (type.title === "Intern") {
@@ -89,7 +81,6 @@ const typePrompt = () => {
 };
 
 const engineerPrompt = () => {
-  console.log("engineerPrompt functioning");
   return inquirer
     .prompt([
       {
@@ -114,7 +105,6 @@ const engineerPrompt = () => {
       },
     ])
     .then((answers) => {
-      console.log(answers);
       const engineer = new Engineer(
         answers.name,
         answers.id,
@@ -127,7 +117,6 @@ const engineerPrompt = () => {
 };
 
 const internPrompt = () => {
-  console.log("intern prompt functioning");
   return inquirer
     .prompt([
       {
@@ -152,7 +141,6 @@ const internPrompt = () => {
       },
     ])
     .then((answers) => {
-      console.log(answers);
       const intern = new Intern(
         answers.name,
         answers.id,
@@ -165,8 +153,6 @@ const internPrompt = () => {
 };
 
 const generateTeam = () => {
-  console.log("generating team...");
-  console.log(team);
   generateWebsite("index.html", team);
 };
 
@@ -180,7 +166,6 @@ const generateCards = (team) => {
   const html = [];
 
   const managerCard = (manager) => {
-    // console.log(manager);
     let managerHtml = ` <div class="card" style="width: 18rem;">
       <div class="card-body">
         <p class="card-text">
@@ -195,7 +180,6 @@ const generateCards = (team) => {
   };
 
   const engineerCard = (engineer) => {
-    // console.log(engineer);
     let engineerHtml = ` <div class="card" style="width: 18rem;">
       <div class="card-body">
         <p class="card-text">
@@ -210,7 +194,6 @@ const generateCards = (team) => {
   };
 
   const internCard = (intern) => {
-    // console.log(intern);
     let internHtml = ` <div class="card" style="width: 18rem;">
       <div class="card-body">
         <p class="card-text">
@@ -225,8 +208,6 @@ const generateCards = (team) => {
   };
 
   for (let i = 0; i < team.length; i++) {
-    console.log(i);
-    console.log(team[i]);
     if (team[i].getRole() === "Manager") {
       managerCard(team[i]);
     } else if (team[i].getRole() === "Engineer") {
