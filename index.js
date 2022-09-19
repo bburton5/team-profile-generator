@@ -170,65 +170,97 @@ const generateTeam = () => {
   generateWebsite("index.html", team);
 };
 
-const instructions = () => {
-  console.log("Instructions:");
-  console.log(
-    "The first four questions are in regards to your team manager. All questions afterwards are in regards to all employee types other than manager."
-  );
-};
-
-const generateWebsite = (fileName, team) => {
-  fs.writeFile(fileName, generateData(team), function (err, data) {
+const generateWebsite = (fileName, data) => {
+  fs.writeFile(fileName, mainHtml(data), function (err, data) {
     console.log(Error);
   });
 };
 
-const generateCards = () => {
-  const result = "";
-  for (let i = 0; i < team.length; i++) {
-    result =
-      result +
-      `<div class="card" style="width: 18rem;">
-    <div class="card-body">
-      <p class="card-text">
-      Name: ${team[i].name} <br>
-      Employee ID Number: ${team[i].id} <br>
-      Email: ${team[i].email} <br>
-      Office Number: ${team[i].office}</p>
+const generateCards = (team) => {
+  const html = [];
+
+  const managerCard = (manager) => {
+    // console.log(manager);
+    let managerHtml = ` <div class="card" style="width: 18rem;">
+      <div class="card-body">
+        <p class="card-text">
+        Name: ${manager.name} <br>
+        Employee ID Number: ${manager.id} <br>
+        Email: ${manager.email} <br>
+        Office Number: ${manager.office}</p>
+      </div>
     </div>
-  </div>`;
+    `;
+    html.push(managerHtml);
+  };
+
+  const engineerCard = (engineer) => {
+    // console.log(engineer);
+    let engineerHtml = ` <div class="card" style="width: 18rem;">
+      <div class="card-body">
+        <p class="card-text">
+        Name: ${engineer.name} <br>
+        Employee ID Number: ${engineer.id} <br>
+        Email: ${engineer.email} <br>
+        Github: ${engineer.github}</p>
+      </div>
+    </div>
+    `;
+    html.push(engineerHtml);
+  };
+
+  const internCard = (intern) => {
+    // console.log(intern);
+    let internHtml = ` <div class="card" style="width: 18rem;">
+      <div class="card-body">
+        <p class="card-text">
+        Name: ${intern.name} <br>
+        Employee ID Number: ${intern.id} <br>
+        Email: ${intern.email} <br>
+        School: ${intern.school}</p>
+      </div>
+    </div>
+    `;
+    html.push(internHtml);
+  };
+
+  for (let i = 0; i < team.length; i++) {
+    console.log(i);
+    console.log(team[i]);
+    if (team[i].getRole() === "Manager") {
+      managerCard(team[i]);
+    } else if (team[i].getRole() === "Engineer") {
+      engineerCard(team[i]);
+    } else if (team[i].getRole() === "Intern") {
+      internCard(team[i]);
+    }
   }
-  return result;
+
+  return html.join("");
 };
 
-const generateData = (data) => {
+const mainHtml = (data) => {
   return `<!DOCTYPE html>
-  <html lang="en">
+    <html lang="en">
     <head>
-      <meta charset="UTF-8" />
-      <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-      <title>Document</title>
-      <link
-        rel="stylesheet"
-        href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
-        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
-        crossorigin="anonymous"
-      />
-      <link rel="stylesheet" href="./src/style.css" />
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Team Profile Generator</title>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <link rel="stylesheet" href="./dist/style.css">
     </head>
     <body>
+    <header>
     <nav class="navbar navbar-light bg-light">
-  <a class="navbar-brand" href="#">
-    Your Generated Team:
-  </a>
-</nav>
-      <p>
-      ${generateCards()}
-      </p>
+    <a class="navbar-brand" href="#">
+      Your Team
+    </a>
+  </nav>
+  </header>
+        ${generateCards(data)}
     </body>
-  </html>`;
+    </html>`;
 };
 
-instructions();
 managerPrompts();
