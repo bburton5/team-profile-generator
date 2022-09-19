@@ -186,7 +186,7 @@ const generateCards = (team) => {
         <p class="card-text">
         Name: ${manager.name} <br>
         Employee ID Number: ${manager.id} <br>
-        Email: ${manager.email} <br>
+        Email: <a href="mailto:${manager.email}">${manager.email}</a><br>
         Office Number: ${manager.office}</p>
       </div>
     </div>
@@ -201,8 +201,8 @@ const generateCards = (team) => {
         <p class="card-text">
         Name: ${engineer.name} <br>
         Employee ID Number: ${engineer.id} <br>
-        Email: ${engineer.email} <br>
-        Github: ${engineer.github}</p>
+        Email: <a href="mailto:${engineer.email}">${engineer.email}</a><br>
+        Github: <a href=https://github.com/${engineer.github} target="_blank">${engineer.github}</a></p>
       </div>
     </div>
     `;
@@ -216,7 +216,7 @@ const generateCards = (team) => {
         <p class="card-text">
         Name: ${intern.name} <br>
         Employee ID Number: ${intern.id} <br>
-        Email: ${intern.email} <br>
+        Email: <a href="mailto:${intern.email}">${intern.email}</a><br>
         School: ${intern.school}</p>
       </div>
     </div>
