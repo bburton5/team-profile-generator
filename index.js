@@ -1,6 +1,5 @@
 // Includes packages needed for this application
 const inquirer = require("inquirer");
-const Employee = require("./lib/employee");
 const Manager = require("./lib/manager");
 const Engineer = require("./lib/engineer");
 const Intern = require("./lib/intern");
@@ -172,7 +171,7 @@ const generateTeam = () => {
 const instructions = () => {
   console.log("Instructions:");
   console.log(
-    "The first four questions are in regards to your team manager. All questions afterwards are in regards to all employee types except manager."
+    "The first four questions are in regards to your team manager. All questions afterwards are in regards to all employee types other than manager."
   );
 };
 
